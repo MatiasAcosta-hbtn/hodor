@@ -1,32 +1,22 @@
 Starting new HTTP connection (1): 158.69.76.135:80
-http://158.69.76.135:80 "GET /captcha.php HTTP/1.1" 200 266
+http://158.69.76.135:80 "GET /captcha.php HTTP/1.1" 200 267
 Starting new HTTP connection (1): 158.69.76.135:80
 http://158.69.76.135:80 "POST /level3.php HTTP/1.1" 200 26
-Success
 Starting new HTTP connection (1): 158.69.76.135:80
 http://158.69.76.135:80 "POST /level3.php HTTP/1.1" 200 26
-Success
 Starting new HTTP connection (1): 158.69.76.135:80
 http://158.69.76.135:80 "POST /level3.php HTTP/1.1" 200 26
-Success
 Starting new HTTP connection (1): 158.69.76.135:80
 http://158.69.76.135:80 "POST /level3.php HTTP/1.1" 200 26
-Success
 Starting new HTTP connection (1): 158.69.76.135:80
 http://158.69.76.135:80 "POST /level3.php HTTP/1.1" 200 26
-Success
 Starting new HTTP connection (1): 158.69.76.135:80
 http://158.69.76.135:80 "POST /level3.php HTTP/1.1" 200 26
-Success
 Starting new HTTP connection (1): 158.69.76.135:80
 http://158.69.76.135:80 "POST /level3.php HTTP/1.1" 200 26
-Success
 Starting new HTTP connection (1): 158.69.76.135:80
 http://158.69.76.135:80 "POST /level3.php HTTP/1.1" 200 26
-Success
 Starting new HTTP connection (1): 158.69.76.135:80
 http://158.69.76.135:80 "POST /level3.php HTTP/1.1" 200 26
-Success
 Starting new HTTP connection (1): 158.69.76.135:80
 http://158.69.76.135:80 "POST /level3.php HTTP/1.1" 200 26
-Success

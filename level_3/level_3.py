@@ -2,12 +2,9 @@
 import requests
 import logging
 from urllib import request
-import shutil
 from PIL import Image
-import pytesseract
-import argparse
+import pytesseract as pyte
 import cv2
-import os
 
 def init_logger():
     """Initialize a logger for info control"""
@@ -59,27 +56,9 @@ def get_image():
     return "Image.png"
 
 def get_captcha(image):
-    ap = argparse.ArgumentParser()
-    ap.add_argument("-i", "--image", required=True,
-	help="path to input image to be OCR'd")
-    ap.add_argument("-p", "--preprocess", type=str, default="thresh",
-	help="type of preprocessing to be done")
-    args = vars(ap.parse_args())
-    image = cv2.imread(args[image])
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    # check to see if we should apply thresholding to preprocess the
-    # image
-    if args["preprocess"] == "thresh":
-	    gray = cv2.threshold(gray, 0, 255,
-	    	cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
-    # make a check to see if median blurring should be done to remove
-    # noise
-    elif args["preprocess"] == "blur":
-	    gray = cv2.medianBlur(gray, 3)
-    # write the grayscale image to disk as a temporary file so we can
-    # apply OCR to it
-    filename = "{}.png".format(os.getpid())
-    cv2.imwrite(filename, gray)
+	img = cv2.imread(image)
+	img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+	return (pyte.image_to_string(img))
 
 log = init_logger()
 url = "http://158.69.76.135/level3.php"
@@ -88,15 +67,15 @@ image = get_image()
 captcha = get_captcha(image)
 header_key = {"Cookie":"HoldTheDoor={}".format(key), "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"
 , "referer":url}
-data_key = {"id":"2277", "holdthedoor":"Submit+Query", "key":key}
-
+data_key = {"id":"2277", "holdthedoor":"Submit+Query", "key":key, "captcha":captcha[:4]}
+print(data_key)
 
 #print("Sending requests....")
 
-"""for i in range(916):
+for i in range(10):
     try:
         requests.post(url, data = data_key, headers = header_key)
         log.info("Success")
     except:
         log.info("Fail")
-print("Finish")"""
+print("Finish")
